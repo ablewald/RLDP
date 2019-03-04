@@ -30,7 +30,7 @@ class CalculatedApiInterfacer:
         logger.debug(f'Found a total of {total_count} replays.')
         return total_count
 
-    def get_all_replay_ids(self) -> Set[str]:
+    def get_all_replay_ids(self, limit=None) -> Set[str]:
         replay_ids = set()
         _query_params = self.initial_query_params._replace(page=1)
         while True:
@@ -39,6 +39,9 @@ class CalculatedApiInterfacer:
                 break
             _query_params = _query_params._replace(page=_query_params.page + 1)
             replay_ids.update(replay_ids_on_page)
+            if limit:
+                if len(replay_ids) > limit:
+                    break
         logger.info(f'Found a total of {len(replay_ids)} unique replay ids.')
         return replay_ids
 
