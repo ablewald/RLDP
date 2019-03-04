@@ -1,5 +1,5 @@
 .idea/
 replays/
 *.json
-
+.ipynb_checkpoints/
 *.pyc
